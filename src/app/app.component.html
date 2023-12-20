@@ -1,0 +1,36 @@
+<div class="container">
+  <h4>Please upload a CSV file</h4>
+  <input type="file" (change)="onFileSelected($event)" accept=".csv" class="file-input" />
+
+  <div *ngFor="let project of overlapsArray">
+    <h2>For project {{ project.projectName }}:</h2>
+  
+    <div *ngIf="project.overlaps.pairs && project.overlaps.pairs.length > 0; else noPairsMessage">
+      <table border="1">
+        <thead>
+          <tr>
+            <th>Employee ID #1</th>
+            <th>Employee ID #2</th>
+            <th>Project Name</th>
+            <th>Days worked together</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let pair of project.overlaps.pairs">
+            <td>{{ pair[0] }}</td>
+            <td>{{ pair[1] }}</td>
+            <td>{{ project.projectName }}</td>
+            <td>{{ pair[2] }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ng-template #noPairsMessage>
+      <p>No pairs found for {{ project.projectName }}</p>
+    </ng-template>
+  </div>
+  
+  
+  
+</div>
